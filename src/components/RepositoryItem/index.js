@@ -23,7 +23,7 @@ const RepositoryItem = props => {
       <div>
         <img
           src="https://assets.ccbp.in/frontend/react-js/issues-count-img.png"
-          alt="issues"
+          alt="open issues"
         />
         <p>{`${issuesCount} issues`}</p>
       </div>

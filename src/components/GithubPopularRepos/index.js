@@ -31,13 +31,11 @@ class GithubPopularRepos extends Component {
   }
 
   getRepoList = async () => {
-    const {languageSelected} = this.state
+    const {activeId} = this.state
     this.setState({apiStatus: apiStatusConstant.loading})
-    const githubReposApiUrl = `https://apis.ccbp.in/popular-repos?language=${languageSelected}`
-    const options = {
-      method: 'GET',
-    }
-    const response = await fetch(githubReposApiUrl, options)
+    const githubReposApiUrl = `https://apis.ccbp.in/popular-repos?language=${activeId}`
+
+    const response = await fetch(githubReposApiUrl)
 
     if (response.ok === true) {
       const data = await response.json()
@@ -63,14 +61,7 @@ class GithubPopularRepos extends Component {
   }
 
   onFilterList = id => {
-    this.setState({activeId: id}, this.getLanguage)
-  }
-
-  getLanguage = () => {
-    const {activeId} = this.state
-    const selectedBtn = languageFiltersData.find(each => each.id === activeId)
-    const activeLanguage = selectedBtn.language
-    this.setState({languageSelected: activeLanguage}, this.getRepoList)
+    this.setState({activeId: id}, this.getRepoList)
   }
 
   renderLanguageButton = () => {
